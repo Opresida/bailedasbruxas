@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+/* Baile das Bruxas · manual de marca v1.0, direção "Brasa na noite":
+   70% escuro, 20% fogo (ouro, brasa, sangue), 10% osso. A luz da página vem do fogo, de baixo ou de trás. */
+
+@theme inline {
+  --color-noite: #07040a;
+  --color-carvao: #1a0d06;
+  --color-fio: #3a2416;
+  --color-cinza-escuro: #6e6258;
+  --color-cinza: #9a8e82;
+  --color-areia: #d8cec3;
+  --color-osso: #f4f1ec;
+  --color-ouro: #ffc21e;
+  --color-brasa: #ff7a14;
+  --color-sangue: #e8270e;
+  --font-sans: var(--font-barlow), Arial, sans-serif;
+  --font-chamada: var(--font-barlow-condensed), 'Arial Narrow', sans-serif;
+  --font-gotica: var(--font-pirata), Georgia, serif;
+}
+
+html {
+  background: #07040a;
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  background: #07040a;
+  color: #f4f1ec;
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+::selection {
+  background: #ff7a14;
+  color: #07040a;
+}
+
+/* gótica: só em títulos curtos, com inicial maiúscula (nunca tudo em maiúsculas) */
+.gotica {
+  font-family: var(--font-gotica);
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+/* chamada: datas, números, nomes de atração, botões */
+.titulo {
+  font-family: var(--font-chamada);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+
+/* rótulo pequeno: o que é, de quem é, quando */
+.rotulo {
+  font-family: var(--font-chamada);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* o degradê Fogo, sempre de cima para baixo, só em título */
+.fogo {
+  background-image: linear-gradient(180deg, #ffd23a 0%, #ffb01c 34%, #ff7a14 62%, #e8270e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-bottom: 0.12em;
+}
+
+/* o triângulo (o olho da abóbora) como marcador */
+.olho {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 0.42em solid transparent;
+  border-right: 0.42em solid transparent;
+  border-bottom: 0.66em solid #ff7a14;
+  flex: 0 0 auto;
+}
+
+/* brasas: pontos de luz que sobem devagar, o tempo todo */
+.brasas {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.brasas i {
+  position: absolute;
+  bottom: -4%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffe9a8 0%, #ff7a14 45%, rgba(196, 42, 6, 0) 72%);
+  animation: subir linear infinite;
+}
+@keyframes subir {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  12% { opacity: var(--o, 0.8); }
+  82% { opacity: var(--o, 0.8); }
+  100% { transform: translate3d(var(--dx, 20px), -118vh, 0); opacity: 0; }
+}
+
+/* a logo acende ao abrir a página: sai do escuro e ganha a luz por trás */
+@keyframes acender {
+  0% { opacity: 0; filter: brightness(0) blur(14px) drop-shadow(0 0 0 rgba(255, 122, 20, 0)); transform: scale(0.94); }
+  45% { opacity: 1; filter: brightness(0.45) blur(2px) drop-shadow(0 0 30px rgba(255, 122, 20, 0.55)); }
+  62% { filter: brightness(1.5) blur(0) drop-shadow(0 0 90px rgba(255, 194, 30, 0.75)); }
+  100% { opacity: 1; filter: brightness(1) blur(0) drop-shadow(0 0 60px rgba(255, 122, 20, 0.32)); transform: none; }
+}
+.acende { animation: acender 1.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* a luz de trás respira */
+@keyframes pulsar {
+  from { opacity: 0.72; transform: scale(1); }
+  to { opacity: 1; transform: scale(1.06); }
+}
+.pulsa { animation: pulsar 3.6s ease-in-out infinite alternate; }
+
+/* varredura de luz no nome da atração */
+@keyframes varrer {
+  0%, 62% { background-position: 130% 0; }
+  100% { background-position: -40% 0; }
+}
+.varre {
+  background-image: linear-gradient(105deg, #f4f1ec 0%, #f4f1ec 40%, #ffe9a8 48%, #ffffff 50%, #ffe9a8 52%, #f4f1ec 60%, #f4f1ec 100%);
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: varrer 4.2s ease-in-out infinite;
+}
+
+/* entrada ao chegar na tela (classe posta pelo componente Revela) */
+.revela { opacity: 0; transform: translateY(26px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+.revela.visivel { opacity: 1; transform: none; }
+
+/* pontos de espera do botão de enviar */
+@keyframes ponto {
+  0%, 100% { opacity: 0.25; }
+  30% { opacity: 1; }
+}
+.pontos > span { animation: ponto 1.2s ease-in-out infinite; }
+.pontos > span:nth-child(2) { animation-delay: 0.15s; }
+.pontos > span:nth-child(3) { animation-delay: 0.3s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .brasas i, .pulsa, .varre, .pontos > span { animation: none; }
+  .brasas i { opacity: 0.5; bottom: auto; }
+  .acende { animation: none; filter: drop-shadow(0 0 60px rgba(255, 122, 20, 0.32)); }
+  .revela { opacity: 1; transform: none; transition: none; }
+}
