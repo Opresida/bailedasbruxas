@@ -4,7 +4,8 @@ Página pública da festa **Baile das Bruxas** (Royals Entretenimento): sexta-fe
 Festas & Convenções, com o Chefin como atração nacional. Mostra a atração, guarda os nomes da lista VIP e dá à
 portaria a lista com confirmação de presença.
 
-Repositório oficial: `github.com/Opresida/bailedasbruxas`. Publicação: Vercel.
+Repositório oficial: `github.com/Opresida/bailedasbruxas`. No ar em **https://bailedasbruxas.vercel.app**
+(projeto `bailedasbruxas` na Vercel, conta `opresida`; cada envio à `main` publica sozinho).
 
 ## Rodar no computador
 
@@ -29,8 +30,9 @@ repositório.
 
 ## Publicar (Vercel)
 
-1. Importar este repositório na Vercel. O `vercel.json` já fixa o projeto como Next.js (não apagar).
-2. Em *Settings → Environment Variables*:
+1. O projeto já existe na Vercel e está ligado a este repositório. O `vercel.json` fixa o projeto como Next.js
+   (não apagar) e define os cabeçalhos padrão.
+2. Em *Settings → Environment Variables* (ainda **não** preenchidas: sem elas a lista fica fora do ar de propósito):
    - `DATABASE_URL`: endereço de conexão do banco no Neon (com *Connection pooling* ligado);
    - `LISTA_SENHA`: senha da portaria (6 caracteres ou mais);
    - `SITE_URL` (opcional): endereço final, se houver domínio próprio.
@@ -40,8 +42,9 @@ Modelo das variáveis em `.env.example`.
 
 ## Estado
 
-- Site pronto e testado no computador (página, formulário, portaria, painel, planilha, ícones e imagem de compartilhamento).
-- **Ainda não publicado**: falta o Humberto mandar subir.
+- Site publicado em 13/10/2026, com o tema da festa (teias, morcegos, aranhas, brasas) e a abertura de 4 segundos.
+- Conferido em 360, 390, 768, 1024 e 1440 px, sem rolagem lateral.
+- **Sem banco e sem senha da portaria por enquanto**: `/lista` avisa que falta a senha e o formulário recusa envio.
 - **A lista VIP está "em breve"** de propósito: abre quando a regra, o prazo e a senha da portaria forem definidos (`src/lib/evento.ts`, objeto `LISTA`).
 
 Mais detalhes: `CONTEXT.md` (regras e decisões), `ARCHITECTURE.md` (mapa do código), `TODO.md`.

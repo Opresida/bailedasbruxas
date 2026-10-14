@@ -14,6 +14,8 @@
 - O site é **página do evento + lista VIP**, reaproveitando o funcionamento da lista do O.C.U.L.T.O (`D:\dev\oculto`): formulário, portaria com confirmação de presença, painel e planilha.
 - Marca: manual "Brasa na noite" (área do cliente em `/baile-das-bruxas` no site da BrandSquad).
 - Logos da Royals e da BrandSquad entram sempre.
+- Publicar no GitHub e na Vercel já, com a lista "em breve" e sem banco, até ele passar regra, prazo e senha. No ar em `bailedasbruxas.vercel.app`.
+- Tema da festa na página (morcegos, aranhas, brasas, teias) e abertura temática de 4 segundos, que toca **toda vez** que a página inicial abre (escolha dele, e não uma vez por visita).
 
 ## O que ainda NÃO foi confirmado (e por isso não aparece no site)
 
