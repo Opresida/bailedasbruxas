@@ -88,8 +88,10 @@ export default function Pagina() {
             </Revela>
             <Revela atraso={120} className="relative mx-auto w-full max-w-[460px] self-end">
               <div className="pulsa absolute inset-x-[6%] bottom-0 top-[18%]" style={{ background: 'radial-gradient(closest-side, rgba(255,122,20,.5) 0%, rgba(232,39,14,.16) 56%, transparent 78%)' }} aria-hidden />
-              {/* a base do corpo some por máscara (uma faixa escura por cima apareceria como caixa contra a luz do fundo) */}
-              <div className="relative" style={{ maskImage: 'linear-gradient(180deg, #000 74%, transparent 100%)', WebkitMaskImage: 'linear-gradient(180deg, #000 74%, transparent 100%)' }}>
+              {/* a base do corpo some por máscara (uma faixa escura por cima apareceria como caixa contra a luz do fundo).
+                  A máscara corta tudo o que passa da caixa onde ela está, inclusive o brilho em volta do artista: por isso a
+                  caixa é 80 px maior que a foto para os lados e para cima. Sem essa folga o brilho vira um retângulo. */}
+              <div className="relative -mx-20 -mt-20 px-20 pt-20" style={{ maskImage: 'linear-gradient(180deg, #000 76%, transparent 100%)', WebkitMaskImage: 'linear-gradient(180deg, #000 76%, transparent 100%)' }}>
                 <img src={ATRACAO.foto} alt={`${ATRACAO.nome}, foto de divulgação`} width={ATRACAO.largura} height={ATRACAO.altura} loading="lazy" className="block h-auto w-full" style={{ filter: 'contrast(1.06) saturate(.92) drop-shadow(0 0 2px rgba(255,170,60,.9)) drop-shadow(0 0 34px rgba(255,122,20,.45))' }} />
               </div>
             </Revela>
