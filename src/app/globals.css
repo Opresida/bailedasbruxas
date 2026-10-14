@@ -139,15 +139,6 @@ body {
 .revela { opacity: 0; transform: translateY(26px); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
 .revela.visivel { opacity: 1; transform: none; }
 
-/* pontos de espera do botão de enviar */
-@keyframes ponto {
-  0%, 100% { opacity: 0.25; }
-  30% { opacity: 1; }
-}
-.pontos > span { animation: ponto 1.2s ease-in-out infinite; }
-.pontos > span:nth-child(2) { animation-delay: 0.15s; }
-.pontos > span:nth-child(3) { animation-delay: 0.3s; }
-
 /* ——— o tema por cima da página: teias nos cantos, morcegos voando, aranha no fio e aranhas andando ———
    (componente Tema; os mesmos desenhos do manual de marca). Não recebe clique: a página funciona por baixo. */
 .tema { position: fixed; inset: 0; z-index: 30; overflow: hidden; pointer-events: none; }
@@ -198,7 +189,7 @@ body {
   html { scroll-behavior: auto; }
   .tema .morcego, .tema .fio, .aranha-anda { display: none; }
   .tema .teia.te1, .abertura-gira { animation: none; }
-  .brasas i, .pulsa, .varre, .pontos > span { animation: none; }
+  .brasas i, .pulsa, .varre { animation: none; }
   .brasas i { opacity: 0.5; bottom: auto; }
   .acende { animation: none; filter: drop-shadow(0 0 60px rgba(255, 122, 20, 0.32)); }
   .revela { opacity: 1; transform: none; transition: none; }

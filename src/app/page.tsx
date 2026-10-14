@@ -1,12 +1,11 @@
 /* eslint-disable @next/next/no-img-element -- recortes e logos já vêm em WebP no tamanho certo; sem servidor de imagem */
 import { Abertura } from '@/components/abertura';
 import { Brasas } from '@/components/brasas';
-import { FormLista } from '@/components/form-lista';
 import { Revela } from '@/components/revela';
 import { Tema } from '@/components/tema';
-import { ATRACAO, CAMAROTES, EVENTO, INGRESSOS, LISTA, estadoDaLista } from '@/lib/evento';
+import { ATRACAO, CAMAROTES, EVENTO, INGRESSOS, INGRESSOS_ONDE } from '@/lib/evento';
 
-// Página do evento. Ordem: a marca acesa e a data → a atração (quem é, feitos, maiores hits) → a lista VIP →
+// Página do evento. Ordem: a marca acesa e a data → a atração (quem é, feitos, maiores hits) → os ingressos →
 // o local → quem assina. Segue o manual de marca: escuro primeiro, fogo como única luz, gótica só em título curto.
 // Por cima de tudo: a abertura de 4 s (Abertura) e o tema da festa (Tema: teias, morcegos, aranhas). As aranhas
 // andam só por cima do que tem `data-aranha` ("titulo" = sobre as letras, "caixa" = pela borda de cima).
@@ -19,9 +18,7 @@ const emTela = { mixBlendMode: 'screen', filter: 'grayscale(1) brightness(1.5) c
 const zap = (numero: string) => `https://wa.me/${numero}?text=${encodeURIComponent(`Olá! Quero reservar um camarote no ${EVENTO.nome} (${EVENTO.dataCompleta}).`)}`;
 
 export default function Pagina() {
-  const estado = estadoDaLista();
   const camarotes = CAMAROTES.confirmado ? CAMAROTES.contatos : [];
-  const quando = `${EVENTO.dataExtenso}, no ${EVENTO.local}`;
 
   return (
     <>
@@ -59,8 +56,10 @@ export default function Pagina() {
             {EVENTO.localCompleto}
           </p>
           <div className="mt-9 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row">
-            <a href="#atracao" className={botaoCheio}>Quem é a atração</a>
-            <a href="#lista" className={botaoFio}>Lista VIP</a>
+            {INGRESSOS && (
+              <a href={INGRESSOS} target="_blank" rel="noopener noreferrer" className={botaoCheio}>Comprar ingresso ↗</a>
+            )}
+            <a href="#atracao" className={INGRESSOS ? botaoFio : botaoCheio}>Quem é a atração</a>
           </div>
         </div>
       </header>
@@ -122,41 +121,27 @@ export default function Pagina() {
           </div>
         </section>
 
-        {/* ——— lista VIP ——— */}
-        <section id="lista" className="relative isolate scroll-mt-4 overflow-hidden border-t border-fio" aria-labelledby="titulo-lista">
-          <div className="absolute inset-0 -z-10" style={{ background: 'radial-gradient(50% 70% at 12% 100%, #3a1206 0%, #07040a 72%)' }} aria-hidden>
-            <Brasas quantidade={12} semente={23} />
-          </div>
-          <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-10 sm:py-20 lg:grid-cols-2 lg:gap-16">
-            <Revela className="min-w-0">
-              <p className="rotulo flex items-center gap-3 text-brasa">
-                <span className="olho" aria-hidden />
-                Lista VIP
-              </p>
-              <h2 id="titulo-lista" data-aranha="titulo" className="gotica fogo mt-3 text-[clamp(3.4rem,11vw,6.5rem)]">Seu nome na lista</h2>
-              <dl className="mt-7 flex flex-col text-lg text-areia">
-                {(
-                  [
-                    ['Quando', `${EVENTO.dataExtenso.charAt(0).toUpperCase()}${EVENTO.dataExtenso.slice(1)}.`],
-                    ['Onde', `${EVENTO.localCompleto}.`],
-                    ...(estado === 'aberta' && LISTA.beneficio ? [['Lista', LISTA.beneficio]] : []),
-                    ...(estado === 'aberta' && LISTA.prazo ? [['Prazo', `A lista aceita nomes ${LISTA.prazo}.`]] : []),
-                  ] as [string, string][]
-                ).map(([rotulo, texto]) => (
-                  <div key={rotulo} className="flex gap-4 border-t border-fio py-4">
-                    <dt className="rotulo w-20 shrink-0 pt-1.5 text-cinza">{rotulo}</dt>
-                    <dd>{texto}</dd>
-                  </div>
-                ))}
-              </dl>
-            </Revela>
-            <Revela atraso={120} className="min-w-0">
-              <div data-aranha="caixa">
-                <FormLista estado={estado} evento={EVENTO.nome} quando={quando} />
-              </div>
-            </Revela>
-          </div>
-        </section>
+        {/* ——— ingressos: este show não tem lista VIP; a entrada é pelo ingresso, vendido fora do site ——— */}
+        {INGRESSOS && (
+          <section id="ingressos" className="relative isolate scroll-mt-4 overflow-hidden border-t border-fio" aria-labelledby="titulo-ingressos">
+            <div className="absolute inset-0 -z-10" style={{ background: 'radial-gradient(50% 70% at 50% 100%, #3a1206 0%, #07040a 72%)' }} aria-hidden>
+              <Brasas quantidade={12} semente={23} />
+            </div>
+            <div className="mx-auto flex max-w-6xl flex-col items-center px-5 py-14 text-center sm:px-10 sm:py-20">
+              <Revela className="flex w-full flex-col items-center">
+                <p className="rotulo flex items-center gap-3 text-brasa">
+                  <span className="olho" aria-hidden />
+                  Ingressos
+                </p>
+                <h2 id="titulo-ingressos" data-aranha="titulo" className="gotica fogo mt-3 text-[clamp(3.4rem,11vw,6.5rem)]">Garanta o seu</h2>
+                <p className="mt-5 max-w-md text-lg text-areia">
+                  {ATRACAO.nome} no {EVENTO.nome}, {EVENTO.dataExtenso}, no {EVENTO.local}. Venda online pela {INGRESSOS_ONDE}.
+                </p>
+                <a href={INGRESSOS} target="_blank" rel="noopener noreferrer" className={`${botaoCheio} mt-8 w-full sm:w-auto`}>Comprar ingresso ↗</a>
+              </Revela>
+            </div>
+          </section>
+        )}
 
         {/* ——— o local, e os botões que já tiverem sido confirmados ——— */}
         <section className="relative isolate overflow-hidden border-t border-fio" aria-labelledby="titulo-local">
@@ -209,8 +194,6 @@ export default function Pagina() {
 
           <p className="rotulo max-w-xl text-center leading-relaxed text-cinza-escuro">
             {EVENTO.nome} · {EVENTO.dia} {EVENTO.dataCompleta} · {EVENTO.local}
-            <br />
-            <span className="normal-case tracking-normal">Os dados enviados na lista são usados só para a lista de entrada e os avisos desta festa.</span>
           </p>
 
           <a href="https://www.brandsquad.com.br" target="_blank" rel="noopener" className="flex flex-col items-center gap-3 opacity-80 transition-opacity hover:opacity-100">

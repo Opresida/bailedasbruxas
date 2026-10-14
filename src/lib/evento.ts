@@ -1,6 +1,6 @@
 // Dados do evento. Tudo que aparece no site sobre a festa sai daqui.
 // Só entra o que o Humberto confirmou. O que ainda não foi confirmado fica vazio e o site se ajusta sozinho
-// (lista "em breve", sem horário, sem botão de camarote).
+// (sem horário, sem botão de camarote).
 
 export const EVENTO = {
   nome: 'Baile das Bruxas',
@@ -21,43 +21,6 @@ export const EVENTO = {
 
 /** Início da festa para os robôs de busca (dados estruturados). Sem horário confirmado, vale só o dia. */
 export const DATA_ISO = '2026-11-13';
-
-// ——— Lista VIP ———
-// O formulário, a portaria e o painel estão prontos, mas a lista só abre quando o Humberto disser
-// (1) o que a lista dá, (2) até quando aceita nomes e (3) o horário-limite de entrada, se houver.
-// Para abrir: preencher os campos abaixo e mudar `liberada` para true.
-export const LISTA: {
-  liberada: boolean;
-  /** Uma frase, do jeito que a produção confirmou. Ex.: "Entrada gratuita até as 23h para quem está na lista." */
-  beneficio: string;
-  /** Até quando o formulário aceita nomes. Vazio = fica aberto até ser fechado à mão (`liberada: false`). */
-  fecha: Date | null;
-  /** Texto do prazo, para a página. Ex.: "até sexta, 23h". */
-  prazo: string;
-  /** Horário-limite de entrada pela lista, para o painel separar quem chegou antes e depois. */
-  limiteEntrada: Date | null;
-  /** O mesmo horário em texto. Ex.: "23h". */
-  limite: string;
-} = {
-  liberada: false,
-  beneficio: '',
-  fecha: null,
-  prazo: '',
-  limiteEntrada: null,
-  limite: '',
-};
-
-export type EstadoDaLista = 'em-breve' | 'aberta' | 'encerrada';
-
-/** LISTA_TESTE=1 abre a lista só no computador, para testar o formulário e a portaria antes de liberar de verdade. */
-const emTeste = () => process.env.NODE_ENV !== 'production' && process.env.LISTA_TESTE === '1';
-
-export function estadoDaLista(agora: number = Date.now()): EstadoDaLista {
-  if (LISTA.fecha && agora >= LISTA.fecha.getTime()) return 'encerrada';
-  return LISTA.liberada || emTeste() ? 'aberta' : 'em-breve';
-}
-
-export const ROTULO_DA_LISTA: Record<EstadoDaLista, string> = { 'em-breve': 'LISTA AINDA NÃO ABRIU', aberta: 'LISTA ABERTA', encerrada: 'LISTA ENCERRADA' };
 
 // ——— Atração ———
 // Números conferidos na fonte em 13.10.2026 (views no YouTube, arredondadas para baixo) e fatos com fonte pública.
@@ -94,7 +57,12 @@ export const CAMAROTES = {
   ],
 };
 
-/** Venda de ingressos. Vazio = ainda sem link; o botão não aparece. */
-export const INGRESSOS = '';
+// ——— Ingressos ———
+// Este show NÃO tem lista VIP (correção do Humberto em 13/10/2026): a entrada é pelo ingresso.
+// Link que ele passou, sem os códigos de rastreio do Instagram que vinham junto (utm_* e fbclid eram do clique dele).
+/** Venda de ingressos. Vazio = sem link; os botões e a seção de ingressos não aparecem. */
+export const INGRESSOS = 'https://oticket.com.br/event/11616/baile-do-poderoso-o-ultimo';
+/** Nome da plataforma de venda, para o texto da página. */
+export const INGRESSOS_ONDE = 'OTicket';
 
 export const SITE_URL = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'http://localhost:3400');

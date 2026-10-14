@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Barlow, Barlow_Condensed, Pirata_One } from 'next/font/google';
-import { ATRACAO, DATA_ISO, EVENTO, SITE_URL } from '@/lib/evento';
+import { ATRACAO, DATA_ISO, EVENTO, INGRESSOS, SITE_URL } from '@/lib/evento';
 import './globals.css';
 
 // Tipografia do manual de marca: Pirata One (títulos curtos), Barlow Condensed (chamadas e números) e Barlow (texto).
@@ -36,6 +36,7 @@ const EVENTO_LD = {
   performer: { '@type': 'MusicGroup', name: ATRACAO.nome },
   organizer: EVENTO.apresentam.map((name) => ({ '@type': 'Organization', name })),
   image: [`${SITE_URL}/opengraph-image.jpg`],
+  ...(INGRESSOS ? { offers: { '@type': 'Offer', url: INGRESSOS } } : {}),
   description: DESCRICAO,
 };
 

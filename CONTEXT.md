@@ -11,18 +11,16 @@
 ## Decisões do Humberto (2026-10-13)
 
 - Repositório oficial `Opresida/bailedasbruxas`, publicação na Vercel, com imagem de compartilhamento, ícones e tudo pronto para subir.
-- O site é **página do evento + lista VIP**, reaproveitando o funcionamento da lista do O.C.U.L.T.O (`D:\dev\oculto`): formulário, portaria com confirmação de presença, painel e planilha.
+- O site é a **página do evento, com a venda de ingressos**. Começou com uma lista VIP trazida do O.C.U.L.T.O, mas **este show não tem lista VIP** (correção dele na noite de 13/10/2026): formulário, portaria, painel e banco saíram do site.
+- **Ingressos:** OTicket, `https://oticket.com.br/event/11616/baile-do-poderoso-o-ultimo` (a página lá se chama "BAILE DAS BRUXAS", sexta 13/11/2026, Manaus/AM, Tarumã Fest). O link que ele mandou vinha com `utm_*` e `fbclid` do Instagram dele; no site entrou sem eles.
 - Marca: manual "Brasa na noite" (área do cliente em `/baile-das-bruxas` no site da BrandSquad).
 - Logos da Royals e da BrandSquad entram sempre.
-- Publicar no GitHub e na Vercel já, com a lista "em breve" e sem banco, até ele passar regra, prazo e senha. No ar em `bailedasbruxas.vercel.app`.
+- Publicar no GitHub e na Vercel já. No ar em `bailedasbruxas.vercel.app`.
 - Tema da festa na página (morcegos, aranhas, brasas, teias) e abertura temática de 4 segundos, que toca **toda vez** que a página inicial abre (escolha dele, e não uma vez por visita).
 
 ## O que ainda NÃO foi confirmado (e por isso não aparece no site)
 
-- **Regra da lista VIP** (o que ela dá), **prazo** para colocar o nome e **horário-limite** de entrada. Enquanto isso a lista fica "em breve".
-- **Senha da portaria** (`LISTA_SENHA`).
-- **Horário** de abertura e **cidade**.
-- **Link de ingressos**.
+- **Horário** de abertura e **cidade** (a página da OTicket diz Manaus/AM; no site só entra quando ele confirmar).
 - **Telefones de camarote**: estão na arte da cliente e já estão em `evento.ts`, mas o botão só aparece com `CAMAROTES.confirmado = true`.
 
 ## Marca (manual v1.0)
@@ -37,6 +35,4 @@
 - **Não inventar** regra, preço, horário, promoção nem atração: o site diz só o que o Humberto confirmou.
 - **Números do Chefin** (views e feitos) foram conferidos na fonte em 13.10.2026 e arredondados para baixo; reconferir antes de mexer. Fora do site: controvérsias e o símbolo do Jumpman (marca da Nike) que vem no arquivo de logo dele.
 - A arte de referência da cliente diz "nova data" e "novo local": no site entram só a data e o local.
-- **Listas por indicação** (só nome) entram por script e só quando o Humberto mandar; não existe botão de adicionar nome na portaria.
-- Os dados da lista são de pessoas reais: ficam atrás da senha da portaria e o banco é apagado depois do evento, com a confirmação do Humberto.
-- Segredos (`DATABASE_URL`, `LISTA_SENHA`) só na Vercel. Nunca no repositório.
+- O site não guarda dado de ninguém e não tem segredo: é estático.
