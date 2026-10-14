@@ -13,7 +13,7 @@ import { Colunas, type Coluna } from './graficos';
 // Lido sempre na hora: durante a festa, a cada atualização entram as confirmações novas.
 // O filtro por indicação (?origem=) fica num lugar só, acima de tudo, e vale para a página inteira.
 
-export const metadata: Metadata = { title: 'Comparecimento · Baile das Bruxas', robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: 'Comparecimento', robots: { index: false, follow: false } };
 export const dynamic = 'force-dynamic';
 
 const plural = (n: number, um: string, varios: string) => `${n.toLocaleString('pt-BR')} ${n === 1 ? um : varios}`;

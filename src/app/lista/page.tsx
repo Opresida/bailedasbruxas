@@ -10,7 +10,7 @@ import { Tabela } from './tabela';
 // Lista da portaria. Só entra com a senha (LISTA_SENHA). Sempre lida na hora, nunca de cache:
 // enquanto a lista aceita nomes, a portaria precisa ver quem acabou de entrar.
 
-export const metadata: Metadata = { title: 'Lista da portaria · Baile das Bruxas', robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: 'Lista da portaria', robots: { index: false, follow: false } };
 export const dynamic = 'force-dynamic';
 
 export default async function Lista({ searchParams }: { searchParams: Promise<{ erro?: string }> }) {

@@ -35,7 +35,7 @@ const EVENTO_LD = {
   location: { '@type': 'Place', name: EVENTO.localCompleto },
   performer: { '@type': 'MusicGroup', name: ATRACAO.nome },
   organizer: EVENTO.apresentam.map((name) => ({ '@type': 'Organization', name })),
-  image: [`${SITE_URL}/opengraph-image.png`],
+  image: [`${SITE_URL}/opengraph-image.jpg`],
   description: DESCRICAO,
 };
 

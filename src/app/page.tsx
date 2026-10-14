@@ -1,11 +1,15 @@
 /* eslint-disable @next/next/no-img-element -- recortes e logos já vêm em WebP no tamanho certo; sem servidor de imagem */
+import { Abertura } from '@/components/abertura';
 import { Brasas } from '@/components/brasas';
 import { FormLista } from '@/components/form-lista';
 import { Revela } from '@/components/revela';
+import { Tema } from '@/components/tema';
 import { ATRACAO, CAMAROTES, EVENTO, INGRESSOS, LISTA, estadoDaLista } from '@/lib/evento';
 
 // Página do evento. Ordem: a marca acesa e a data → a atração (quem é, feitos, maiores hits) → a lista VIP →
 // o local → quem assina. Segue o manual de marca: escuro primeiro, fogo como única luz, gótica só em título curto.
+// Por cima de tudo: a abertura de 4 s (Abertura) e o tema da festa (Tema: teias, morcegos, aranhas). As aranhas
+// andam só por cima do que tem `data-aranha` ("titulo" = sobre as letras, "caixa" = pela borda de cima).
 
 const botaoCheio = 'titulo inline-flex items-center justify-center whitespace-nowrap bg-brasa px-7 py-4 text-xl text-noite transition-colors hover:bg-ouro';
 const botaoFio = 'titulo inline-flex items-center justify-center whitespace-nowrap border border-brasa px-7 py-4 text-xl text-osso transition-colors hover:bg-brasa hover:text-noite';
@@ -21,6 +25,8 @@ export default function Pagina() {
 
   return (
     <>
+      <Abertura />
+      <Tema />
       {/* ——— a marca acesa ——— */}
       <header className="relative isolate flex min-h-svh flex-col overflow-hidden">
         <div className="absolute inset-0 -z-10" aria-hidden>
@@ -43,7 +49,7 @@ export default function Pagina() {
 
         <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center px-5 py-10 text-center sm:px-10">
           <h1 className="w-full">
-            <img src="/img/logo.webp" alt={EVENTO.nome} width={1400} height={842} fetchPriority="high" className="acende mx-auto w-full max-w-[820px]" />
+            <img src="/img/logo.webp" alt={EVENTO.nome} width={1400} height={842} fetchPriority="high" className="acende apos-abertura mx-auto w-full max-w-[820px]" />
           </h1>
           <p className="titulo mt-6 text-[clamp(2.6rem,9vw,5.5rem)] text-osso sm:mt-8">
             {EVENTO.dia} <span className="fogo">{EVENTO.dataCompleta}</span>
@@ -62,17 +68,19 @@ export default function Pagina() {
       <main>
         {/* ——— a atração ——— */}
         <section id="atracao" className="relative isolate scroll-mt-4 overflow-hidden border-t border-fio" aria-labelledby="titulo-atracao">
-          <div className="absolute inset-0 -z-10" style={{ background: 'radial-gradient(46% 60% at 72% 62%, #4a1606 0%, #1a0d06 46%, #07040a 80%)' }} aria-hidden />
+          <div className="absolute inset-0 -z-10" style={{ background: 'radial-gradient(46% 60% at 72% 62%, #4a1606 0%, #1a0d06 46%, #07040a 80%)' }} aria-hidden>
+            <Brasas quantidade={14} semente={11} />
+          </div>
           <div className="mx-auto grid max-w-6xl items-end gap-6 px-5 pt-14 sm:px-10 sm:pt-20 lg:grid-cols-[1fr_0.9fr]">
             <Revela className="min-w-0 pb-10 lg:pb-20">
               <p className="rotulo inline-block bg-sangue px-3 py-1.5 text-osso">{ATRACAO.rotulo}</p>
-              <h2 id="titulo-atracao" className="titulo varre mt-4 text-[clamp(5rem,20vw,11rem)] leading-[0.82]">
+              <h2 id="titulo-atracao" data-aranha="titulo" className="titulo varre mt-4 text-[clamp(5rem,20vw,11rem)] leading-[0.82]">
                 {ATRACAO.nome}
               </h2>
               <p className="mt-5 max-w-md text-lg text-areia">O rapper carioca sobe ao palco do {EVENTO.nome} na {EVENTO.dataExtenso.split(' de 2026')[0]}.</p>
               <ul className="mt-8 grid gap-3 sm:grid-cols-3">
-                {ATRACAO.feitos.map((f) => (
-                  <li key={f.titulo} className="border border-fio bg-noite/60 p-4">
+                {ATRACAO.feitos.map((f, i) => (
+                  <li key={f.titulo} data-aranha={i === 1 ? 'caixa' : undefined} className="border border-fio bg-noite/60 p-4">
                     <p className="titulo text-2xl text-ouro">{f.titulo}</p>
                     <p className="mt-1.5 text-sm leading-snug text-areia">{f.texto}</p>
                   </li>
@@ -81,8 +89,10 @@ export default function Pagina() {
             </Revela>
             <Revela atraso={120} className="relative mx-auto w-full max-w-[460px] self-end">
               <div className="pulsa absolute inset-x-[6%] bottom-0 top-[18%]" style={{ background: 'radial-gradient(closest-side, rgba(255,122,20,.5) 0%, rgba(232,39,14,.16) 56%, transparent 78%)' }} aria-hidden />
-              <img src={ATRACAO.foto} alt={`${ATRACAO.nome}, foto de divulgação`} width={ATRACAO.largura} height={ATRACAO.altura} loading="lazy" className="relative block h-auto w-full" style={{ filter: 'contrast(1.06) saturate(.92) drop-shadow(0 0 2px rgba(255,170,60,.9)) drop-shadow(0 0 34px rgba(255,122,20,.45))' }} />
-              <div className="absolute inset-x-0 bottom-0 h-1/4" style={{ background: 'linear-gradient(180deg, rgba(7,4,10,0), #07040a)' }} aria-hidden />
+              {/* a base do corpo some por máscara (uma faixa escura por cima apareceria como caixa contra a luz do fundo) */}
+              <div className="relative" style={{ maskImage: 'linear-gradient(180deg, #000 74%, transparent 100%)', WebkitMaskImage: 'linear-gradient(180deg, #000 74%, transparent 100%)' }}>
+                <img src={ATRACAO.foto} alt={`${ATRACAO.nome}, foto de divulgação`} width={ATRACAO.largura} height={ATRACAO.altura} loading="lazy" className="block h-auto w-full" style={{ filter: 'contrast(1.06) saturate(.92) drop-shadow(0 0 2px rgba(255,170,60,.9)) drop-shadow(0 0 34px rgba(255,122,20,.45))' }} />
+              </div>
             </Revela>
           </div>
 
@@ -94,7 +104,7 @@ export default function Pagina() {
                   <span className="olho" aria-hidden />
                   Os maiores hits
                 </p>
-                <ol className="mt-6 grid gap-x-10 sm:grid-cols-2">
+                <ol className="mt-6 grid gap-x-10 lg:grid-cols-2">
                   {ATRACAO.hits.map((h, i) => (
                     <li key={h.titulo} className="flex items-baseline gap-4 border-t border-fio py-4">
                       <span className="titulo w-8 shrink-0 text-2xl text-cinza-escuro">{String(i + 1).padStart(2, '0')}</span>
@@ -114,14 +124,16 @@ export default function Pagina() {
 
         {/* ——— lista VIP ——— */}
         <section id="lista" className="relative isolate scroll-mt-4 overflow-hidden border-t border-fio" aria-labelledby="titulo-lista">
-          <div className="absolute inset-0 -z-10" style={{ background: 'radial-gradient(50% 70% at 12% 100%, #3a1206 0%, #07040a 72%)' }} aria-hidden />
+          <div className="absolute inset-0 -z-10" style={{ background: 'radial-gradient(50% 70% at 12% 100%, #3a1206 0%, #07040a 72%)' }} aria-hidden>
+            <Brasas quantidade={12} semente={23} />
+          </div>
           <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-10 sm:py-20 lg:grid-cols-2 lg:gap-16">
             <Revela className="min-w-0">
               <p className="rotulo flex items-center gap-3 text-brasa">
                 <span className="olho" aria-hidden />
                 Lista VIP
               </p>
-              <h2 id="titulo-lista" className="gotica fogo mt-3 text-[clamp(3.4rem,11vw,6.5rem)]">Seu nome na lista</h2>
+              <h2 id="titulo-lista" data-aranha="titulo" className="gotica fogo mt-3 text-[clamp(3.4rem,11vw,6.5rem)]">Seu nome na lista</h2>
               <dl className="mt-7 flex flex-col text-lg text-areia">
                 {(
                   [
@@ -139,13 +151,18 @@ export default function Pagina() {
               </dl>
             </Revela>
             <Revela atraso={120} className="min-w-0">
-              <FormLista estado={estado} evento={EVENTO.nome} quando={quando} />
+              <div data-aranha="caixa">
+                <FormLista estado={estado} evento={EVENTO.nome} quando={quando} />
+              </div>
             </Revela>
           </div>
         </section>
 
         {/* ——— o local, e os botões que já tiverem sido confirmados ——— */}
-        <section className="border-t border-fio" aria-labelledby="titulo-local">
+        <section className="relative isolate overflow-hidden border-t border-fio" aria-labelledby="titulo-local">
+          <div className="absolute inset-0 -z-10" style={{ background: 'radial-gradient(50% 60% at 50% 100%, #2a0e05 0%, #07040a 70%)' }} aria-hidden>
+            <Brasas quantidade={10} semente={41} />
+          </div>
           <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-5 py-14 text-center sm:px-10 sm:py-20">
             <Revela className="flex flex-col items-center">
               <p className="rotulo flex items-center gap-3 text-brasa">
