@@ -29,7 +29,7 @@ vercel.json               fixa o projeto como Next.js e define cabeçalhos de se
 
 ## Ingressos
 
-- Este show **não tem lista VIP**: a entrada é pelo ingresso, vendido fora do site (OTicket).
+- Este show **não tem lista VIP**: a entrada é pelo ingresso, vendido fora do site (Igarê).
 - O link fica em `INGRESSOS` (`src/lib/evento.ts`), sem códigos de rastreio. Ele alimenta três botões "Comprar ingresso":
   no topo, na seção "Garanta o seu" e na seção do local. Com `INGRESSOS` vazio, os três e a seção somem.
 - A lista VIP que existia (formulário, portaria, painel, banco) foi retirada em 13/10/2026. Se um evento futuro precisar,

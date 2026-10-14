@@ -30,7 +30,7 @@ apagar) e define os cabeçalhos padrão. Não há variável obrigatória; `SITE_
 ## Estado
 
 - Publicado em 13/10/2026, com o tema da festa (teias, morcegos, aranhas, brasas) e a abertura de 4 segundos.
-- Três botões "Comprar ingresso" levam para a OTicket (`INGRESSOS` em `src/lib/evento.ts`).
+- Três botões "Comprar ingresso" levam para a Igarê (`INGRESSOS` em `src/lib/evento.ts`).
 - Conferido em 360, 390, 768, 1024 e 1440 px, sem rolagem lateral.
 
 Mais detalhes: `CONTEXT.md` (regras e decisões), `ARCHITECTURE.md` (mapa do código), `TODO.md`.

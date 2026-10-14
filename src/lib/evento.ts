@@ -59,10 +59,10 @@ export const CAMAROTES = {
 
 // ——— Ingressos ———
 // Este show NÃO tem lista VIP (correção do Humberto em 13/10/2026): a entrada é pelo ingresso.
-// Link que ele passou, sem os códigos de rastreio do Instagram que vinham junto (utm_* e fbclid eram do clique dele).
+// Venda pela Igarê desde 14/10/2026 (antes era a OTicket). Link do jeito que ele passou, sem código de rastreio.
 /** Venda de ingressos. Vazio = sem link; os botões e a seção de ingressos não aparecem. */
-export const INGRESSOS = 'https://oticket.com.br/event/11616/baile-do-poderoso-o-ultimo';
+export const INGRESSOS = 'https://app.igare.com.br/e/baile-das-bruxas-2';
 /** Nome da plataforma de venda, para o texto da página. */
-export const INGRESSOS_ONDE = 'OTicket';
+export const INGRESSOS_ONDE = 'Igarê';
 
 export const SITE_URL = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'http://localhost:3400');

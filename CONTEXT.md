@@ -12,7 +12,7 @@
 
 - Repositório oficial `Opresida/bailedasbruxas`, publicação na Vercel, com imagem de compartilhamento, ícones e tudo pronto para subir.
 - O site é a **página do evento, com a venda de ingressos**. Começou com uma lista VIP trazida do O.C.U.L.T.O, mas **este show não tem lista VIP** (correção dele na noite de 13/10/2026): formulário, portaria, painel e banco saíram do site.
-- **Ingressos:** OTicket, `https://oticket.com.br/event/11616/baile-do-poderoso-o-ultimo` (a página lá se chama "BAILE DAS BRUXAS", sexta 13/11/2026, Manaus/AM, Tarumã Fest). O link que ele mandou vinha com `utm_*` e `fbclid` do Instagram dele; no site entrou sem eles.
+- **Ingressos:** Igarê, `https://app.igare.com.br/e/baile-das-bruxas-2` (trocado por ele em 14/10/2026; a página lá diz "BAILE DAS BRUXAS", 13/11 às 21h00, Tarumã Fest (antigo Copacabana), Manaus/AM). Antes era a OTicket (`oticket.com.br/event/11616/...`), que saiu do site. Link de ingresso entra sem código de rastreio de terceiros (`fbclid`, `utm_*` do Instagram).
 - Marca: manual "Brasa na noite" (área do cliente em `/baile-das-bruxas` no site da BrandSquad).
 - Logos da Royals e da BrandSquad entram sempre.
 - Publicar no GitHub e na Vercel já. No ar em `bailedasbruxas.vercel.app`.
@@ -20,7 +20,7 @@
 
 ## O que ainda NÃO foi confirmado (e por isso não aparece no site)
 
-- **Horário** de abertura e **cidade** (a página da OTicket diz Manaus/AM; no site só entra quando ele confirmar).
+- **Horário** de abertura e **cidade** (a página da Igarê diz 21h00 e Manaus/AM; no site só entra quando ele confirmar).
 - **Telefones de camarote**: estão na arte da cliente e já estão em `evento.ts`, mas o botão só aparece com `CAMAROTES.confirmado = true`.
 
 ## Marca (manual v1.0)
