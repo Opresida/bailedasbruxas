@@ -6,7 +6,8 @@
 - [ ] Senha da portaria (`LISTA_SENHA`, na Vercel).
 - [ ] Confirmar os telefones de camarote (`CAMAROTES.confirmado`).
 - [ ] Horário, cidade e link de ingressos, se forem para o site.
-- [ ] Papel de 100 Mídia e Baile do Poderoso (hoje aparecem como "Parceiros").
+- [x] Papel de 100 Mídia e Baile do Poderoso: apresentam junto com a Royals (13/10/2026).
+- [ ] Link de vendas: o vídeo do Chefin diz "vendas no link"; falta o Humberto informar qual é (`INGRESSOS` em `src/lib/evento.ts`).
 - [ ] Mandar subir: primeiro envio ao GitHub, projeto na Vercel e banco no Neon.
 
 ## Pendente

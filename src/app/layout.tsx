@@ -9,7 +9,7 @@ const condensada = Barlow_Condensed({ variable: '--font-barlow-condensed', subse
 const barlow = Barlow({ variable: '--font-barlow', subsets: ['latin'], weight: ['400', '500', '600'] });
 
 const TITULO = `${EVENTO.nome} · ${ATRACAO.nome} · ${EVENTO.dataCompleta} no ${EVENTO.local}`;
-const DESCRICAO = `${EVENTO.nome}, ${EVENTO.dataExtenso}, no ${EVENTO.localCompleto}. Atração nacional: ${ATRACAO.nome}. Realização: ${EVENTO.realizacao}.`;
+const DESCRICAO = `${EVENTO.nome}, ${EVENTO.dataExtenso}, no ${EVENTO.localCompleto}. Atração nacional: ${ATRACAO.nome}. Apresentam: ${EVENTO.apresentamTexto}.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -34,7 +34,7 @@ const EVENTO_LD = {
   eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
   location: { '@type': 'Place', name: EVENTO.localCompleto },
   performer: { '@type': 'MusicGroup', name: ATRACAO.nome },
-  organizer: { '@type': 'Organization', name: EVENTO.realizacao },
+  organizer: EVENTO.apresentam.map((name) => ({ '@type': 'Organization', name })),
   image: [`${SITE_URL}/opengraph-image.png`],
   description: DESCRICAO,
 };

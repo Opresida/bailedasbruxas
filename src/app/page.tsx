@@ -29,11 +29,16 @@ export default function Pagina() {
           <Brasas quantidade={26} semente={3} />
         </div>
 
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-5 pt-6 sm:px-10 sm:pt-8">
-          <img src="/img/royals.webp" alt={EVENTO.realizacao} width={520} height={176} className="h-9 w-auto sm:h-11" style={umaCor} />
-          <p className="rotulo text-right text-cinza">
-            {EVENTO.realizacao} <span className="text-brasa">apresenta</span>
-          </p>
+        <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-5 pt-6 sm:px-10 sm:pt-8">
+          {/* quem apresenta: as três marcas juntas */}
+          <div className="flex items-center gap-3 sm:gap-5">
+            <img src="/img/royals.webp" alt="Royals Entretenimento" width={520} height={176} className="h-7 w-auto sm:h-10" style={umaCor} />
+            <span className="h-6 w-px bg-white/25" aria-hidden />
+            <img src="/img/100-midia.webp" alt="100 Mídia" width={600} height={282} className="h-6 w-auto sm:h-9" style={umaCor} />
+            <span className="h-6 w-px bg-white/25" aria-hidden />
+            <img src="/img/baile-do-poderoso.webp" alt="Baile do Poderoso" width={900} height={312} className="h-7 w-auto sm:h-10" style={emTela} />
+          </div>
+          <p className="rotulo text-right text-brasa">apresentam</p>
         </div>
 
         <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center px-5 py-10 text-center sm:px-10">
@@ -167,24 +172,21 @@ export default function Pagina() {
         </section>
       </main>
 
-      {/* ——— quem assina a noite: realização, local, parceiros e a BrandSquad por último ——— */}
+      {/* ——— quem assina a noite: as três marcas que apresentam, o local e a BrandSquad por último ——— */}
       <footer className="border-t border-fio px-5 pb-10 pt-14 sm:px-10">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-10">
           <div className="flex flex-wrap items-end justify-center gap-x-12 gap-y-8 sm:gap-x-16">
             <figure className="flex flex-col items-center gap-3">
-              <figcaption className="rotulo text-cinza-escuro">Realização</figcaption>
-              <img src="/img/royals.webp" alt={EVENTO.realizacao} width={520} height={176} loading="lazy" className="h-12 w-auto" style={umaCor} />
+              <figcaption className="rotulo text-cinza-escuro">Apresentam</figcaption>
+              <span className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+                <img src="/img/royals.webp" alt="Royals Entretenimento" width={520} height={176} loading="lazy" className="h-12 w-auto" style={umaCor} />
+                <img src="/img/100-midia.webp" alt="100 Mídia" width={600} height={282} loading="lazy" className="h-10 w-auto" style={umaCor} />
+                <img src="/img/baile-do-poderoso.webp" alt="Baile do Poderoso" width={900} height={312} loading="lazy" className="h-11 w-auto" style={emTela} />
+              </span>
             </figure>
             <figure className="flex flex-col items-center gap-3">
               <figcaption className="rotulo text-cinza-escuro">Local</figcaption>
               <img src="/img/taruma.webp" alt={EVENTO.localCompleto} width={372} height={246} loading="lazy" className="h-16 w-auto" style={emTela} />
-            </figure>
-            <figure className="flex flex-col items-center gap-3">
-              <figcaption className="rotulo text-cinza-escuro">Parceiros</figcaption>
-              <span className="flex items-center gap-8">
-                <img src="/img/baile-do-poderoso.webp" alt="Baile do Poderoso" width={900} height={312} loading="lazy" className="h-11 w-auto" style={emTela} />
-                <img src="/img/100-midia.webp" alt="100 Mídia" width={600} height={282} loading="lazy" className="h-10 w-auto" style={umaCor} />
-              </span>
             </figure>
           </div>
 

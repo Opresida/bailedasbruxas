@@ -5,7 +5,7 @@
 - **Baile das Bruxas**, festa de Halloween da Royals Entretenimento (a mesma cliente do O.C.U.L.T.O).
 - **Sexta-feira, 13.11.2026**, no **Tarumã · Casa de Festas & Convenções**.
 - **Atração nacional: Chefin.**
-- Parceiros que vieram na pasta da cliente: 100 Mídia e Baile do Poderoso (papel exato a confirmar).
+- Quem apresenta (definido pela cliente em 13/10/2026): Royals, 100 Mídia e Baile do Poderoso, as três marcas sempre juntas (`EVENTO.apresentam` em `src/lib/evento.ts`). Não existe mais "Realização" nem "Parceiros" no site.
 - Site e marca: BrandSquad.
 
 ## Decisões do Humberto (2026-10-13)

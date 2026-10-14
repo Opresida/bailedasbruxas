@@ -4,7 +4,9 @@
 
 export const EVENTO = {
   nome: 'Baile das Bruxas',
-  realizacao: 'Royals Entretenimento',
+  /** Quem apresenta a festa: as três marcas entram SEMPRE juntas (correção da cliente em 13/10/2026). */
+  apresentam: ['Royals Entretenimento', '100 Mídia', 'Baile do Poderoso'],
+  apresentamTexto: 'Royals, 100 Mídia e Baile do Poderoso',
   local: 'Tarumã',
   localCompleto: 'Tarumã · Casa de Festas & Convenções',
   dia: 'SEXTA',
